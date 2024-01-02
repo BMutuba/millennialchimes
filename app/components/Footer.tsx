@@ -1,41 +1,54 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const Footer = () => {
+  const path = usePathname();
 
-    return (
-        <footer className="bg-black text-white py-4 font-sans font-bold ">
-            <div className="max-w-7xl mx-auto px-4 flex">
-                <div className="flex space-x-20 justify-end p-7">
-                    <div className="flex h-full flex-col justify-end pr-10 h-full">
-                        <div className="hover:text-luckyBrown text-left mt-4">
-                            <p>© 2023 Millennial Chimes</p>
-                        </div>
-                    </div>
+  const links = {
+    user: [
+      { name: "Signup", href: "/signup" },
+      { name: "Login", href: "/login" },
+    ],
+    info: [
+      { name: "About Us", href: "/about" },
+      { name: "Contact Us", href: "/contact" },
+    ],
+    articles: [
+      { name: "Tech News", href: "/tech-news" },
+      { name: "New Tech", href: "/new-tech" },
+      { name: "Interesting Reads", href: "/reads" },
+    ],
+  };
 
-                    <div className="flex flex-col space-y-4 pl-5 ">
-                        <h5 className="font-bold uppercase underline hover:scale-110">User</h5>
-                        <a href="/signup" className="hover:opacity-100 opacity-70">Signup</a>
-                        <a href="/login" className="hover:opacity-100 opacity-70">Login</a>
-                    </div>
-                    <div className="flex flex-col space-y-4">
-                        <h5 className="font-bold uppercase underline hover:scale-110">Info</h5>
-                        <a href="/about" className="hover:opacity-100 opacity-70">About Us</a>
-                        <a href="/contact" className="hover:opacity-100 opacity-70">Contact Us</a>
-                    </div>
-                    <div className="flex flex-col space-y-4">
-                        <h5 className="font-bold uppercase underline hover:scale-110">Articles</h5>
-                        <a href="/tech-news" className="hover:opacity-100 opacity-70">Tech News</a>
-                        <a href="/new-tech" className="hover:opacity-100 opacity-70">New Tech</a>
-                        <a href="/reads" className="hover:opacity-100 opacity-70">Interesting Reads</a>
-                    </div>
-                    <div>
-                        <h5 className="font-bold uppercase underline hover:scale-110">Privacy Policy</h5>
-                    </div>
-                </div>
-
+  if (path === "/login" || path === "/signup") {
+    return null;
+  }
+  return (
+    <footer className="flex bg-black text-white font-sans font-bold   -m-3 gap-5 p-4 pt-4 text-xsm sm:text-sm">
+      <p className="self-end">&copy; 2023 Millennial Chimes</p>
+      
+      <div className="flex justify-self-center w-1/2">
+          {Object.entries(links).map(([key, value], index) => (
+            <div key={index} className="flex flex-col space-y-4 pl-5 flex-1 ">
+              <h6 className="font-bold uppercase underline hover:cursor-pointer">
+                {key}
+              </h6>
+              {value.map((link, linkIndex) => (
+                <Link
+                  key={linkIndex}
+                  href={link.href}
+                  className="hover:opacity-100 opacity-70"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
-
-        </footer>
-    );
+          ))}
+      </div>    
+    
+    </footer>
+  );
 };
 
 export default Footer;
-

@@ -6,9 +6,11 @@ import React from "react";
 import Logo from "../components/Logo";
 
 const SignUp = () => {
-  const [slideIndex, setSlideIndex] = React.useState(0);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  interface value {
+    [key: string]: string;
+  }
+  const [slideIndex, setSlideIndex] = React.useState<number>(0);
+  const [values, setValues] = React.useState<value>({});
   const router = useRouter();
 
   const slides = [
@@ -46,7 +48,7 @@ const SignUp = () => {
   const handleSlideForward = () => {
     if (slideIndex === slides.length - 1) {
       // submit form
-      console.log("submit form");
+      console.log(values);
     } else {
       setSlideIndex(slideIndex + 1);
     }
@@ -98,6 +100,15 @@ const SignUp = () => {
                 <input
                   className="border border-black active:border-black focus:border-black p-2 w-full"
                   type={slide.type}
+                  value={values[slide.title] || ""} // Use the value from the values object, or an empty string if it's not set
+                  onChange={(e) => {
+                    // Create a new object with the same values as the old one, but with the value for this index updated
+                    const newValues = {
+                      ...values,
+                      [slide.title]: e.target.value,
+                    };
+                    setValues(newValues);
+                  }}
                 />
               </form>
             ))

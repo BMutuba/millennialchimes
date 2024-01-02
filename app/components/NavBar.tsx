@@ -30,7 +30,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="flex w-full items-center justify-between ">
+    <nav className="flex w-full items-center justify-between text-xsm">
       <Logo />
       <div className="flex justify-between w-96 ">
         {links.map((link, index) => (

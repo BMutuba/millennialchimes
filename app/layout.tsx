@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import NavBar from "./components/NavBar";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 // const NavBar = dynamic(() => import("./components/NavBar"), { ssr: false });
@@ -18,9 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} p-3`}>
+      <body className={`${inter.className} p-3 flex flex-col justify-between`}>
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
