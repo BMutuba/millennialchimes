@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const path = usePathname();
-
   const links = {
     user: [
       { name: "Signup", href: "/signup" },
@@ -25,15 +24,14 @@ const Footer = () => {
     return null;
   }
   return (
-    <footer className="flex bg-black text-white font-sans font-bold   -m-3 gap-5 p-4 pt-4 text-xsm sm:text-sm">
-      <p className="self-end">&copy; 2023 Millennial Chimes</p>
-      
-      <div className="flex justify-self-center w-1/2">
-          {Object.entries(links).map(([key, value], index) => (
-            <div key={index} className="flex flex-col space-y-4 pl-5 flex-1 ">
-              <h6 className="font-bold uppercase underline hover:cursor-pointer">
-                {key}
-              </h6>
+    <footer className=" bg-black text-white font-sans font-bold  -m-3 gap-5 p-4 pt-4 text-xsm sm:text-sm">
+      <div className="flex flex-col sm:flex-row-reverse gap-4 ">
+        {Object.entries(links).map(([key, value], index) => (
+          <div key={index} className="flex flex-col w-1/2 sm:max-w-52">
+            <h6 className="font-bold uppercase underline hover:cursor-pointer">
+              {key}
+            </h6>
+            <div className="flex sm:flex-col sm:items-start items-center my-3 gap-4">
               {value.map((link, linkIndex) => (
                 <Link
                   key={linkIndex}
@@ -44,9 +42,12 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-          ))}
-      </div>    
-    
+          </div>
+        ))}
+        <p className="sm:self-end w-1/2 text-xsm">
+          &copy; 2023 Millennial Chimes
+        </p>
+      </div>
     </footer>
   );
 };
